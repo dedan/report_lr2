@@ -1,0 +1,119 @@
+%!TEX root = /Users/dedan/bccn/lab_rotations/yifat/report/report_yifat.tex
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgpagella}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+% Uncomment some of the following if you use the features
+%
+% Running Headers and footers
+%\usepackage{fancyhdr}
+
+\usepackage{afterpage}
+
+% Multipart figures
+\usepackage{subfigure}
+
+% More symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+% Package for including code in the document
+\usepackage{listings}
+
+% If you want to generate a toc for each chapter (use with book)
+\usepackage{minitoc}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+% use an appendix section
+\usepackage[toc,page]{appendix}
+
+% nice tables (different hlines)
+\usepackage{ctable}
+
+\newcommand{\rref}[1]{(Figure \ref{#1})}
+\newcommand{\tref}[1]{(Table \ref{#1})}
+% bars vor absolute/magnitude of vector
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\abss}[1]{\ensuremath{\left|\left|#1\right|\right|}}
+% smaller caption of figures
+\renewcommand{\captionfont}{\footnotesize}
+
+% use better citations
+\usepackage[round]{natbib}
+
+% allow for linebreaks in captions
+\usepackage{caption}
+
+
+%%%%%%%%%%%%%%%%%%%%%% to do stuff
+
+% graph painting
+\usepackage{tikz}
+% Command for inserting a to do item
+\newcommand{\todo}[1]{%
+% Add to to do list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+\node [coordinate] (inText) {};
+\end{tikzpicture}%
+
+% Make the margin par
+\marginpar{%
+\begin{tikzpicture}[remember picture]%
+\definecolor{orange}{rgb}{1,0.5,0}
+\draw node[draw=black, fill=orange, text width = 2cm] (inNote)
+{#1};%
+\end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[draw = orange, thick]
+([yshift=-0.2cm] inText)
+-| ([xshift=-0.2cm] inNote.west)
+-| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+\makeatletter \newcommand \listoftodos{\section*{To do list} \@starttoc{tdo}}
+ \newcommand\l@todo[2]
+   {\par\noindent \textit{#2}, \parbox{10cm}{#1}\par} \makeatother
+
+
+
+\usepackage[
+	pdftex,
+	final=true,
+	pdfstartview=FitH
+	]{hyperref}
+
+%%%% hyper & options
+\definecolor{myblue}{rgb}{0.25,0.25,0.75}
+\definecolor{darkblue}{rgb}{0,0,0.75}
+\definecolor{darkred}{rgb}{0.4,0,0}
+\hypersetup{ 
+colorlinks=true,
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+bookmarksopenlevel=2,
+pdfproducer={pdflatex, inkscape, gnuplot},
+frenchlinks=true,
+pdfborder=0 0 0,
+linkcolor=myblue,
+%pagecolor=darkblue,
+urlcolor=myblue,
+citecolor=darkred,
+setpagesize=true
+}

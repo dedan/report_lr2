@@ -1,0 +1,45 @@
+%
+%  untitled
+%
+%  Created by Stephan Gabler on 2011-01-09.
+%  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+%
+\documentclass[11pt,a4paper,pdftex,oneside,liststotoc,listsleft]{scrreprt}
+
+%\includeonly{}
+\input{tex_stuff}
+
+\title{Lab Rotation Report}
+\author{Stephan Gabler\\
+BCCN, Berlin}
+%\email{stephan.gabler@gmail.com}
+
+\date{\today}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\maketitle
+
+
+\include{abstract}
+
+\include{intro}
+
+\include{methods}
+
+\include{results}
+
+\include{appendix}
+
+
+\listoftodos
+
+\bibliographystyle{plainnat}
+\bibliography{bibdb}
+\end{document}
