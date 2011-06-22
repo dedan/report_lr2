@@ -52,10 +52,6 @@ Implementation
 Kinect Facts
 ------------
 
-<!--
-    TODO bild der kinect einfuegen
--->
-
 * 8 bit RGB-Camera with resolution up to 1280x1024 @ 15 Hz or 640x480 @ 30 Hz
 * 11 bit Depth-Camera with resolution of 640x480
 * Depth sensor range: 0.8m - 3.5m (resolution decreases with distance)
@@ -93,6 +89,7 @@ Summary and Outlook
 Ideas for Improvement
 ---------------------
 
+* use more advanced object tracking (e.g.: kallman filter)
 * improve the SIFT-feature computation queue (more detailed in todo.md)
 * multiprocess instead of multithread
 * maybe average over frames
