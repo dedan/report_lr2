@@ -33,18 +33,6 @@
 
 \frame{\titlepage}
 
-\begin{frame}
-    \note{talk is about attention and how it can be used in computer-vision}
-    \note{therefore we first have to define attention}
-    \note{James - Physician by training, but also influential psychologist}
-    
-    \frametitle{Attention}
-    \framesubtitle{What is attention?}
-    \begin{quotation}
-        Everyone knows what attention is. It is the taking possession of the mind, in clear and vivid form, of one out of what seem several simultaneous possible objects or trains of thought. Focalization, concentration of consciousness are of its essence. It implies withdrawal from some things in order to deal effectively with others, and is a condition which has a real opposite in the confused, dazed, scatterbrain state… – William James (1890)
-    \end{quotation}
-\end{frame}
-
 
 \begin{frame}
     \note{why there is something like attention and what it possibly does}
@@ -62,20 +50,15 @@
 
     \begin{columns}
         \begin{column}{5cm}
-            \onslide<1-2>{
+            \onslide<2-3>{
                 Broadbent's filter theory\\
                 it is thought that attention serves as early selection.
             }
-            \onslide<3-4>{
-                Treisman's attenuation theory\\
-                attention is rather like a flashlight, then a filter
-            }
-            \onslide<5>{...}
+            \onslide<4>{...}
         \end{column}
         \begin{column}{5cm}
         \begin{overprint}
-            \includegraphics<2>[width=4cm]{../images/selection.jpg}
-            \includegraphics<4>[width=4cm]{../images/attenuation.jpg}
+            \includegraphics<3>[width=4cm]{../images/selection.jpg}
         \end{overprint}
         \end{column}
     \end{columns}    
@@ -106,17 +89,16 @@
 
     top down $\rightarrow$ task-dependent (objects, categories)
     \begin{itemize}
-        \item<1-> high-level: object features
-        \item<2-> high-level: scene structure
-        \item<3-> mid-level: surface, occlusion, continuation 
+        \item<1-> high-level: object features, scene structure
+        \item<2-> mid-level: surface, occlusion, continuation 
     \end{itemize}
     
-    \begin{columns}<4->
+    \begin{columns}<3->
         \begin{column}{5cm}
             Recent results (Einhauser et. al. 2008) suggest that our attention is object-based. 
         \end{column}
         \begin{column}{5cm}
-            \includegraphics<4->[width=0.9\textwidth]{../images/einhaus.jpg}
+            \includegraphics<3->[width=0.9\textwidth]{../images/einhaus.jpg}
         \end{column}
     \end{columns}        
 \end{frame}
@@ -127,12 +109,13 @@
     \frametitle{Attention}
     \framesubtitle{High-level attention -> Top-down problem}
     
+    How can we attend to an object, before we recognize it?
     
-    How can we attend to an object, before we recognize it as an object.
-    
+    \vspace{1cm}
     $\Rightarrow$ proto-objects
+    \vspace{0.2cm}
     
-    Potential Objects might be computed by mid-level features.
+    potential objects might be computed by mid-level features.
 \end{frame}
 
 
@@ -141,11 +124,11 @@
     \frametitle{Idea}
     \framesubtitle{Use high/mid-level attention in computer vision}
     
-    But how can this be used in computer vision?\\
+    How can his be used in computer vision?\\
     \vspace{0.5cm}
-    We were looking for a very simple heuristics to spot potential objects.\\
+    Look for a very simple heuristics to spot potential objects.\\
     \vspace{0.5cm}
-    $\Rightarrow$ The depth information of a 3D Camera could be used to implement such a simple heuristics.
+    $\Rightarrow$ The depth information of a 3D camera could be used to implement such a simple heuristics.
     
     
 \end{frame}
@@ -155,22 +138,6 @@
 
 \section{Implementation} % (fold)
 \label{sg:sec:implementation}
-
-\begin{frame}
-    \note{give some very basic facts on kinect camera}
-    \frametitle{Implementation}
-    \framesubtitle{Kinect Facts}
-    
-    \includegraphics[width=0.4\textwidth]{../images/kinect.png}
-
-    \begin{itemize}
-        \item<+-> 8 bit RGB-Camera with resolution up to 1280x1024 @ 15 Hz or 640x480 @ 30 Hz
-        \item<+-> 11 bit Depth-Camera with resolution of 640x480
-        \item<+-> Depth sensor range: 0.8m - 3.5m (resolution decreases with distance)
-        \item<+-> the manufacturer provides a SDK
-    \end{itemize}
-\end{frame}
-
 
 \begin{frame}
     \frametitle{Implementation}
@@ -190,26 +157,6 @@
 
 
 \begin{frame}
-    \note{developed in python (because much easier)}
-    \note{all expensive stuff is done by C libraries and wrappers}
-    \frametitle{Implementation}
-    \framesubtitle{Frameworks}
-    
-    The implementation is done in python but compiled C-Code is used for all the computationally expensive stuff.
-    
-    \vspace{0.4cm}
-    
-    Libraries:
-    \begin{description}
-        \item[opencv] computer vision library
-        \item[numpy] mathematics, numerics library for python
-        \item[libsiftfast] Scale Invariant Feature Transform
-        \item[FLANN] approximate nearest neighbors calculation for object matching
-    \end{description}
-\end{frame}
-
-
-\begin{frame}
     \frametitle{Algorithms and Results}
     \framesubtitle{histogram clustering (numpy)}
     \begin{figure}[h]
@@ -221,6 +168,16 @@
 \end{frame}
 
 
+\begin{frame}
+    \frametitle{Algorithms and Results}
+    \framesubtitle{extract and filter contours (opencv)}
+    \begin{figure}[h]
+        \centering
+    \includegraphics[height=0.6\textheight]{../images/extracted_contours.jpg}
+        \caption{Extracted contours are filtered by simple heuristics (size, complexity)}
+        \label{sg:fig:images_extracted_contours}
+    \end{figure}
+\end{frame}
 
 \begin{frame}
     \frametitle{Algorithms and Results}
@@ -244,17 +201,6 @@
     \end{columns}
 \end{frame}
 
-
-\begin{frame}
-    \frametitle{Algorithms and Results}
-    \framesubtitle{extract and filter contours (opencv)}
-    \begin{figure}[h]
-        \centering
-    \includegraphics[height=0.6\textheight]{../images/extracted_contours.jpg}
-        \caption{Extracted contours are filtered by simple heuristics (size, complexity)}
-        \label{sg:fig:images_extracted_contours}
-    \end{figure}
-\end{frame}
 
 
 \begin{frame}
@@ -312,6 +258,14 @@
 
 \begin{frame}
     \frametitle{Summary}
+    \framesubtitle{demonstration}
+    
+    videos ..
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
     \framesubtitle{Results}
     
     \begin{itemize}
@@ -331,11 +285,10 @@
     \framesubtitle{Further Ideas}
     \begin{itemize}
         \item<+-> use more advanced object tracking (e.g.: Kalman filter)
-        \item<+-> improve the SIFT-feature computation queue
-        \item<+-> multiprocess instead of multithread
         \item<+-> maybe average over frames
         \item<+-> use color-histogram of objects for rough mapping
         \item<+-> iterative histogram clustering with neighboring condition
+        \item<+-> multiprocess instead of multithread        
     \end{itemize}
 \end{frame}
 

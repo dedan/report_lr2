@@ -98,6 +98,7 @@ Results and Outlook
     * maybe average over frames
     * try using the high-resolution images of the Kinect
     * use color-histogram of objects for rough mapping
+    * use neighborhood relation in iterative histogram clustering (mention the problem of objects that spread out over several layers)
 
 
 
